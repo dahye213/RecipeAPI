@@ -1,18 +1,18 @@
-﻿namespace FoodRecipeAPI.Models
+﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Text.Json.Serialization;
+
+namespace FoodRecipeAPI.Models
 {
     public class Recipe
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public bool Vegetarian { get; set; }
-        public bool Vegan { get; set; }
-        public bool GlutenFree { get; set; }
-        public bool DairyFree { get; set; }
-        public ICollection<Ingredient> Ingredients { get; set; } 
-        public int ReadyInMinutes { get; set; }
-        public string ImageUrl { get; set; }
-        public string ImageType { get; set; }
-        public string Instructions { get; set; }
+        public int id { get; set; }
+        public string title { get; set; }
+        public string ingredients { get; set; }
+        public string servings { get; set; }
+        public string instructions { get; set; }
+
+        public ICollection<Rate> Rates { get; set; }
+
     }
 
 }
