@@ -30,7 +30,7 @@ namespace FoodRecipeAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    score = table.Column<double>(type: "float", nullable: false),
+                    score = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RecipeId = table.Column<int>(type: "int", nullable: false)
                 },

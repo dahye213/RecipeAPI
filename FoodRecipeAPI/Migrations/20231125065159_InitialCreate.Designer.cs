@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodRecipeAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231125052621_InitialCreate")]
+    [Migration("20231125065159_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,8 +38,8 @@ namespace FoodRecipeAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("score")
-                        .HasColumnType("float");
+                    b.Property<decimal>("score")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 

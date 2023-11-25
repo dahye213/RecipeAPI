@@ -36,8 +36,8 @@ namespace FoodRecipeAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("score")
-                        .HasColumnType("float");
+                    b.Property<decimal>("score")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
