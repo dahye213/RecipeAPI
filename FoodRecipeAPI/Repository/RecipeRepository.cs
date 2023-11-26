@@ -12,7 +12,7 @@ namespace FoodRecipeAPI.Repository
             _context = context;
         }
 
-        public ICollection<Recipe> GetAllRecipes()
+        public ICollection<Recipe> GetRecipes()
         {
             return _context.Recipes.OrderBy(r => r.id).ToList();
         }
@@ -35,9 +35,25 @@ namespace FoodRecipeAPI.Repository
             return ((decimal)rate.Sum(s => s.score) / rate.Count());
         }
 
-        bool IRecipeRepository.RecipeExists(int id)
+        public bool RecipeExists(int id)
         {
             return _context.Recipes.Any(r => r.id == id);
         }
+
+        public bool CreateRecipe(Recipe recipe)
+        {
+            _context.Add(recipe);
+            return Save();
+        }
+
+   
+        public bool Save()
+        {
+            // It saves changes 
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
+
+        
     }
 }

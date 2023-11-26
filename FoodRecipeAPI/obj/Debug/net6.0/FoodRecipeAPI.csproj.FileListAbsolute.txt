@@ -66,3 +66,5 @@ C:\API Clouding\FoodRecipeAPI\RecipeAPI\FoodRecipeAPI\obj\Debug\net6.0\refint\Fo
 C:\API Clouding\FoodRecipeAPI\RecipeAPI\FoodRecipeAPI\obj\Debug\net6.0\FoodRecipeAPI.pdb
 C:\API Clouding\FoodRecipeAPI\RecipeAPI\FoodRecipeAPI\obj\Debug\net6.0\FoodRecipeAPI.genruntimeconfig.cache
 C:\API Clouding\FoodRecipeAPI\RecipeAPI\FoodRecipeAPI\obj\Debug\net6.0\ref\FoodRecipeAPI.dll
+C:\API Clouding\FoodRecipeAPI\RecipeAPI\FoodRecipeAPI\bin\Debug\net6.0\AutoMapper.dll
+C:\API Clouding\FoodRecipeAPI\RecipeAPI\FoodRecipeAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
