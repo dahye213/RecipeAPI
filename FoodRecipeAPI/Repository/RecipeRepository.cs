@@ -1,4 +1,5 @@
 ﻿using FoodRecipeAPI.Data;
+using FoodRecipeAPI.Dto;
 using FoodRecipeAPI.Interfaces;
 using FoodRecipeAPI.Models;
 
@@ -46,7 +47,6 @@ namespace FoodRecipeAPI.Repository
             return Save();
         }
 
-   
         public bool Save()
         {
             // It saves changes 
@@ -54,6 +54,21 @@ namespace FoodRecipeAPI.Repository
             return saved > 0 ? true : false;
         }
 
-        
+        public Recipe GetRecipeTrimToUpper(RecipeDto recipeCreate)
+        {
+            return GetRecipes().Where(r => r.title.Trim().ToUpper() == recipeCreate.title.TrimEnd().ToUpper()).FirstOrDefault();
+        }
+
+        public bool UpdateRecipe(Recipe recipe)
+        {
+            _context.Update(recipe);
+            return Save();
+        }
+
+        public bool DeleteRecipe(Recipe recipe)
+        {
+            _context.Remove(recipe);
+            return Save();
+        }
     }
 }

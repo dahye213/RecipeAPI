@@ -51,7 +51,7 @@ namespace FoodRecipeAPI.Controllers {
             if (!_rateRepository.RateExists(Id))
                 return NotFound();
 
-            var recipe = _rateRepository.GeteRateRecipe(Id);
+            var recipe = _rateRepository.GetRateRecipe(Id);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             return Ok(recipe);

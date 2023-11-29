@@ -12,10 +12,12 @@ namespace FoodRecipeAPI.Controllers
     public class RecipeController : Controller
     {
         private readonly IRecipeRepository _recipeRepository;
+        private readonly IRateRepository _rateRepository;
         private readonly IMapper _mapper;
-        public RecipeController(IRecipeRepository recipeRepository, IMapper mapper)
+        public RecipeController(IRecipeRepository recipeRepository, IRateRepository rateRepository, IMapper mapper)
         {
             _recipeRepository = recipeRepository;
+            _rateRepository = rateRepository;
             _mapper = mapper;
         }
         // GET ALL Recipes (It will return the list of all the recipes)
@@ -69,7 +71,7 @@ namespace FoodRecipeAPI.Controllers
         {
             if (recipeCreate == null)
                 return BadRequest(ModelState);
-            var recipe = _recipeRepository.GetRecipes().Where(r => r.title.Trim().ToUpper() == recipeCreate.title.TrimEnd().ToUpper()).FirstOrDefault();
+            var recipe = _recipeRepository.GetRecipeTrimToUpper(recipeCreate);
             if (recipe != null)
             {
                 ModelState.AddModelError("", "Recipe already exists");
@@ -88,5 +90,60 @@ namespace FoodRecipeAPI.Controllers
 
             return Ok("Successfully created");
         }
+
+        [HttpPut("{recipeId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateRecipe(int recipeId, [FromBody] RecipeDto updatedRecipe)
+        {
+            if (updatedRecipe == null)
+                return BadRequest(ModelState);
+            if (recipeId != updatedRecipe.id)
+                return BadRequest(ModelState);
+            if(!_recipeRepository.RecipeExists(recipeId))
+                return NotFound();
+            if(!ModelState.IsValid)
+                return BadRequest();
+
+            var recipeMap = _mapper.Map<Recipe>(updatedRecipe);
+            if (!_recipeRepository.UpdateRecipe(recipeMap))
+            {
+                ModelState.AddModelError("", "Something went wrong updating");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+
+        /*
+        [HttpDelete("{recipeId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteRecipe(int recipeId)
+        {
+            if (!_recipeRepository.RecipeExists(recipeId))
+            {
+                return NotFound();
+            }
+
+            var ratesToDelete = _rateRepository.GetRate(recipeId); // need a function that will search for rates for specific recipe
+            var recipeToDelete = _recipeRepository.GetRecipe(recipeId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (!_rateRepository.DeleteRates(ratesToDelete.ToList(ratesToDelete))) // After George creating DeleteRates Method, It'll be resolved
+            {
+                ModelState.AddModelError("", "Something went wrong when deleting rates");
+            }
+            if (!_recipeRepository.DeleteRecipe(recipeToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong when deleting recipe");
+            }
+
+            return NoContent();
+
+        }
+        */
     }
 }
