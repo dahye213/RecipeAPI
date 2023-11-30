@@ -2,73 +2,91 @@
 using FoodRecipeAPI.Dto;
 using FoodRecipeAPI.Interfaces;
 using FoodRecipeAPI.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace FoodRecipeAPI.Repository
 {
     public class RecipeRepository : IRecipeRepository
     {
         private readonly DataContext _context;
-        public RecipeRepository(DataContext context) 
+        public RecipeRepository(DataContext context)
         {
             _context = context;
         }
-
-        public ICollection<Recipe> GetRecipes()
+       
+        public async Task AddRecipeAsync(Recipe recipe)
         {
-            return _context.Recipes.OrderBy(r => r.id).ToList();
+            await _context.Recipes.AddAsync(recipe);
+            await _context.SaveChangesAsync();
         }
 
-        public Recipe GetRecipe(int id)
+        public async Task<bool> DeleteRecipeAsync(int id)
         {
-            return _context.Recipes.Where(r => r.id == id).FirstOrDefault();
+            var recipeToDelete = await _context.Recipes.Include(r => r.Rates).SingleAsync(r => r.id == id);
+            var rateTemp = new List<Rate>();
+            rateTemp.AddRange(recipeToDelete.Rates);
+            if (recipeToDelete != null)
+            {
+                recipeToDelete.Rates.Clear();
+                _context.Recipes.Remove(recipeToDelete);
+                _context.Rates.RemoveRange(rateTemp);
+            }
+
+            return await SaveAsync();
         }
 
-        public Recipe GetRecipe(string title)
+        public async Task<Recipe> GetByIdAsync(int id)
         {
-            return _context.Recipes.Where(r => r.title == title).FirstOrDefault();
+            var recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.id == id);
+            if (recipe == null)
+            {
+                throw new Exception("The recipe does not exist");
+            }
+            return recipe;
         }
 
-        public decimal GetRecipeRating(int id)
+        public async Task<Recipe> GetByTitleAsync(string title)
         {
-            var rate = _context.Rates.Where(r => r.Recipe.id == id);
-            if (rate.Count() <=0)
+            var recipe = await _context.Recipes.FirstOrDefaultAsync(r => r.title == title);
+            if (recipe == null)
+            {
+                throw new Exception("The recipe does not exist");
+            }
+            return recipe;
+        }
+
+        public async Task<IEnumerable<Recipe>> GetRecipesAsync()
+        {
+            var recipes = await _context.Recipes.ToListAsync();
+            return recipes.OrderBy(r => r.id);
+        }
+
+        public async Task<bool> RecipeExistsAsync(int id)
+        {
+            return await _context.Recipes.AnyAsync(r => r.id == id);
+        }
+
+        public async Task<bool> SaveAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task UpdateRecipeAsync(Recipe recipe)
+        {
+            _context.Recipes.Update(recipe);
+            await SaveAsync();
+        }
+
+        public async Task<decimal> GetRecipeRating(int id)
+        {
+            var rate = _context.Rates.Where(rt => rt.RecipeId == id);
+            var rateCount = await rate.CountAsync();
+            if (rateCount <= 0)
                 return 0;
-            return ((decimal)rate.Sum(s => s.score) / rate.Count());
-        }
-
-        public bool RecipeExists(int id)
-        {
-            return _context.Recipes.Any(r => r.id == id);
-        }
-
-        public bool CreateRecipe(Recipe recipe)
-        {
-            _context.Add(recipe);
-            return Save();
-        }
-
-        public bool Save()
-        {
-            // It saves changes 
-            var saved = _context.SaveChanges();
-            return saved > 0 ? true : false;
-        }
-
-        public Recipe GetRecipeTrimToUpper(RecipeDto recipeCreate)
-        {
-            return GetRecipes().Where(r => r.title.Trim().ToUpper() == recipeCreate.title.TrimEnd().ToUpper()).FirstOrDefault();
-        }
-
-        public bool UpdateRecipe(Recipe recipe)
-        {
-            _context.Update(recipe);
-            return Save();
-        }
-
-        public bool DeleteRecipe(Recipe recipe)
-        {
-            _context.Remove(recipe);
-            return Save();
+            var totalRating = await rate.SumAsync(rt => rt.score);
+            return (decimal)totalRating / rateCount;
         }
     }
 }

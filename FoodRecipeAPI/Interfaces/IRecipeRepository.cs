@@ -1,22 +1,21 @@
 ﻿using FoodRecipeAPI.Dto;
 using FoodRecipeAPI.Models;
+using System.Linq.Expressions;
 
 namespace FoodRecipeAPI.Interfaces
 {
     public interface IRecipeRepository
     {
-        ICollection<Recipe> GetRecipes();
-        Recipe GetRecipe(int id);
-        Recipe GetRecipe(string title);
-        Recipe GetRecipeTrimToUpper(RecipeDto recipeCreate);
-        decimal GetRecipeRating(int id);
-        bool RecipeExists(int id);
-        bool CreateRecipe(Recipe recipe);
-        bool UpdateRecipe(Recipe recipe);
-        bool DeleteRecipe(Recipe recipe);
-        bool Save();
+        Task<IEnumerable<Recipe>> GetRecipesAsync();
+        Task<Recipe> GetByIdAsync(int id);
+        Task<Recipe> GetByTitleAsync(string title);
+        Task AddRecipeAsync(Recipe recipe);
+        Task UpdateRecipeAsync(Recipe recipe);
+        Task<bool> DeleteRecipeAsync(int id);
+        Task<bool> RecipeExistsAsync(int id);
+        Task<bool> SaveAsync();
+        Task<decimal> GetRecipeRating(int id);
 
 
-      
     }
 }

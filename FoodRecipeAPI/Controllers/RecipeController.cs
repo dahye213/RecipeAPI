@@ -3,6 +3,7 @@ using FoodRecipeAPI.Dto;
 using FoodRecipeAPI.Interfaces;
 using FoodRecipeAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace FoodRecipeAPI.Controllers
@@ -12,50 +13,77 @@ namespace FoodRecipeAPI.Controllers
     public class RecipeController : Controller
     {
         private readonly IRecipeRepository _recipeRepository;
-        private readonly IRateRepository _rateRepository;
+        private readonly ILogger<RecipeController> _logger;
         private readonly IMapper _mapper;
-        public RecipeController(IRecipeRepository recipeRepository, IRateRepository rateRepository, IMapper mapper)
+        public RecipeController(IRecipeRepository recipeRepository, IMapper mapper, ILogger<RecipeController> logger)
         {
             _recipeRepository = recipeRepository;
-            _rateRepository = rateRepository;
             _mapper = mapper;
+            _logger = logger;
         }
         // GET ALL Recipes (It will return the list of all the recipes)
         [HttpGet]
         [ProducesResponseType(200, Type= typeof(IEnumerable<Recipe>))]
-        public IActionResult GetAllRecipes()
+        public async Task<ActionResult<IEnumerable<Recipe>>> GetAllRecipes()
         {
-            var recipes = _recipeRepository.GetRecipes();
-
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
-            } 
-            return Ok(recipes);
+                var recipes = await _recipeRepository.GetRecipesAsync();
+                var results = _mapper.Map<IEnumerable<RecipeDto>>(recipes);
+                return Ok(results);
+            } catch (Exception ex)
+            {
+                return StatusCode(500, "Something went wrong");
+            }
         }
 
         // GET a specific recipe
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type= typeof(Recipe))]
         [ProducesResponseType(400)]
-        public IActionResult GetRecipe(int id)
+        public async Task<ActionResult<RecipeDto>> GetRecipeById(int id)
         {
-            if(!_recipeRepository.RecipeExists(id))
-                return NotFound();
-
-            var recipe = _recipeRepository.GetRecipe(id);
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            return Ok(recipe); 
+            try
+            {
+                var recipe = await _recipeRepository.GetByIdAsync(id);
+                if (recipe == null)
+                {
+                    return NotFound($"Recipe with id {id} not found.");
+                }
+                var result = _mapper.Map<RecipeDto>(recipe);
+                return Ok(result);
+            } catch (Exception ex)
+            {
+                return StatusCode(500, "Something went wrong");
+            }
+        }
+        [HttpGet("title/{title}")]
+        [ProducesResponseType(200, Type = typeof(Recipe))]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<RecipeDto>> GetRecipeByTitle(string title)
+        {
+            try
+            {
+                var recipe = await _recipeRepository.GetByTitleAsync(title);
+                if (recipe == null)
+                {
+                    return NotFound($"Recipe with title {title} not found.");
+                }
+                var result = _mapper.Map<RecipeDto>(recipe);
+                return Ok(result);
+            } catch (Exception ex)
+            {
+                return StatusCode(500,ex.Message);
+            }
         }
 
         // Get rating of a specific recipe
         [HttpGet("{id}/rating")]
         [ProducesResponseType(200, Type = typeof(decimal))]
         [ProducesResponseType(400)]
-        public IActionResult GetRecipeRating(int id)
+        public async Task<ActionResult> GetRecipeRating(int id)
         {
-            if(!_recipeRepository.RecipeExists(id))
+            if(!await _recipeRepository.RecipeExistsAsync(id))
                 return NotFound();
 
             var rating = _recipeRepository.GetRecipeRating(id);
@@ -67,83 +95,96 @@ namespace FoodRecipeAPI.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateRecipe([FromBody] RecipeDto recipeCreate)
+        public async Task<ActionResult> CreateRecipe([FromBody] RecipeDto recipeCreate)
         {
-            if (recipeCreate == null)
-                return BadRequest(ModelState);
-            var recipe = _recipeRepository.GetRecipeTrimToUpper(recipeCreate);
-            if (recipe != null)
+           try
             {
-                ModelState.AddModelError("", "Recipe already exists");
-                return StatusCode(422, ModelState);
-            }
+                if (await _recipeRepository.RecipeExistsAsync(recipeCreate.id))
+                {
+                    return StatusCode(409, $"Recipe with id {recipeCreate.id} already exists.");
+                }
+                var recipeToAdd = _mapper.Map<Recipe>(recipeCreate);
+                await _recipeRepository.AddRecipeAsync(recipeToAdd);
+                await _recipeRepository.SaveAsync();
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var recipeMap = _mapper.Map<Recipe>(recipeCreate);
-            if (!_recipeRepository.CreateRecipe(recipeMap))
+                return StatusCode(201, "Recipe is successfully added");
+            } catch (Exception ex)
             {
-                ModelState.AddModelError("", "Something went wrong while saving");
-                return StatusCode(500, ModelState);
-            }
+                // Log the exception message and stack trace for debugging
+                _logger.LogError(ex, "Error creating recipe");
 
-            return Ok("Successfully created");
+                // Optionally, return a more detailed error message
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
         }
 
         [HttpPut("{recipeId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateRecipe(int recipeId, [FromBody] RecipeDto updatedRecipe)
+        public async Task<ActionResult> UpdateRecipe(int recipeId, [FromBody] RecipeDto updatedRecipe)
         {
-            if (updatedRecipe == null)
-                return BadRequest(ModelState);
-            if (recipeId != updatedRecipe.id)
-                return BadRequest(ModelState);
-            if(!_recipeRepository.RecipeExists(recipeId))
-                return NotFound();
-            if(!ModelState.IsValid)
-                return BadRequest();
-
-            var recipeMap = _mapper.Map<Recipe>(updatedRecipe);
-            if (!_recipeRepository.UpdateRecipe(recipeMap))
+            try
             {
-                ModelState.AddModelError("", "Something went wrong updating");
-                return StatusCode(500, ModelState);
+                if (!await _recipeRepository.RecipeExistsAsync(recipeId))
+                    return NotFound();
+
+                var recipeToUpdate = _mapper.Map<Recipe>(updatedRecipe);
+                await _recipeRepository.UpdateRecipeAsync(recipeToUpdate);
+                await _recipeRepository.SaveAsync();
+
+                return Ok("Recipe is updated successfully.");
+            } catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
             }
-            return NoContent();
         }
 
-        /*
-        [HttpDelete("{recipeId}")]
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> UpdateServings(int id, [FromBody] RecipeDto patchRecipe)
+        {
+            try
+            {
+                if (!await _recipeRepository.RecipeExistsAsync(id))
+                {
+                    return NotFound($"Recipe with id {id} not found.");
+                }
+
+                var exstingRecipe = await _recipeRepository.GetByIdAsync(id);
+                if (exstingRecipe == null)
+                {
+                    return NotFound($"Recipe with id {id} not found.");
+                }
+                _mapper.Map(patchRecipe, exstingRecipe);
+                _recipeRepository.UpdateRecipeAsync(exstingRecipe);
+                await _recipeRepository.SaveAsync();
+                return Ok("Recipe is updated successfully.");
+            } catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+                
+        }
+       
+        [HttpDelete("{id}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult DeleteRecipe(int recipeId)
+        public async Task<ActionResult> DeleteRecipe(int id)
         {
-            if (!_recipeRepository.RecipeExists(recipeId))
+            try
             {
-                return NotFound();
-            }
-
-            var ratesToDelete = _rateRepository.GetRate(recipeId); // need a function that will search for rates for specific recipe
-            var recipeToDelete = _recipeRepository.GetRecipe(recipeId);
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            if (!_rateRepository.DeleteRates(ratesToDelete.ToList(ratesToDelete))) // After George creating DeleteRates Method, It'll be resolved
+                if (!await _recipeRepository.RecipeExistsAsync(id))
+                {
+                    return NotFound();
+                }
+                await _recipeRepository.DeleteRecipeAsync(id);
+                return Ok("Recipe is successfully deleted");
+            } catch (Exception ex)
             {
-                ModelState.AddModelError("", "Something went wrong when deleting rates");
+                _logger.LogError(ex, "Error deleting recipe");
+                return StatusCode(500, ex.Message);
             }
-            if (!_recipeRepository.DeleteRecipe(recipeToDelete))
-            {
-                ModelState.AddModelError("", "Something went wrong when deleting recipe");
-            }
-
-            return NoContent();
-
         }
-        */
     }
 }

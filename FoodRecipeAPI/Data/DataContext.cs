@@ -14,10 +14,16 @@ namespace FoodRecipeAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
+            modelBuilder.Entity<Rate>()
+                .HasOne(r=>r.Recipe)
+                .WithMany(rt=>rt.Rates)
+                .HasForeignKey(rt=>rt.RecipeId);
+
             modelBuilder.Entity<Recipe>()
                        .HasMany(r => r.Rates)
                        .WithOne(rt => rt.Recipe)
-                       .HasForeignKey(rt => rt.RecipeId);
+                       .HasPrincipalKey(r => r.id);
         }
     }
 }

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodRecipeAPI", "FoodRecipeAPI\FoodRecipeAPI.csproj", "{A0312BA9-3E56-4E9A-88A9-EA3BE4BCD3DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodRecipeAPI", "FoodRecipeAPI\FoodRecipeAPI.csproj", "{A0312BA9-3E56-4E9A-88A9-EA3BE4BCD3DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodRecipeWebApp", "FoodRecipeWebApp\FoodRecipeWebApp.csproj", "{DA64A775-D7DC-4E9E-A802-15AE25DE4E89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A0312BA9-3E56-4E9A-88A9-EA3BE4BCD3DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0312BA9-3E56-4E9A-88A9-EA3BE4BCD3DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0312BA9-3E56-4E9A-88A9-EA3BE4BCD3DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA64A775-D7DC-4E9E-A802-15AE25DE4E89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA64A775-D7DC-4E9E-A802-15AE25DE4E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA64A775-D7DC-4E9E-A802-15AE25DE4E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA64A775-D7DC-4E9E-A802-15AE25DE4E89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

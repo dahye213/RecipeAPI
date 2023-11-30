@@ -18,7 +18,7 @@ namespace FoodRecipeAPI
 
         public async Task RetrieveAndStoreDataAsync()
         {
-            string[] queries = {"pasta","soup","pizza","risotto","taco","sushi","rice","cake"};
+            string[] queries = {"pasta","soup","pizza","risotto","taco","sushi","rice","cake","burger"};
             foreach (var query in queries)
             {
                 var client = _httpClientFactory.CreateClient();
@@ -51,7 +51,12 @@ namespace FoodRecipeAPI
                         {
                             foreach (var recipe in recipes)
                             {
-                                _dataContext.Recipes.Add(recipe);
+
+                                if (!_dataContext.Recipes.Any(r=> r.title == recipe.title && r.ingredients == recipe.ingredients)) 
+                                {
+                                    _dataContext.Recipes.Add(recipe);
+                                }
+                                
                             }
                             await _dataContext.SaveChangesAsync();
                             Console.WriteLine($"Processed recipes for query: {query}");
