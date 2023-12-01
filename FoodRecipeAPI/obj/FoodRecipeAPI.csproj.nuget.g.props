@@ -21,5 +21,8 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_Extensions_ApiDescription_Server Condition=" '$(PkgMicrosoft_Extensions_ApiDescription_Server)' == '' ">C:\Users\dahye\.nuget\packages\microsoft.extensions.apidescription.server\6.0.5</PkgMicrosoft_Extensions_ApiDescription_Server>
+    <PkgAWSSDK_Core Condition=" '$(PkgAWSSDK_Core)' == '' ">C:\Users\dahye\.nuget\packages\awssdk.core\3.7.300.12</PkgAWSSDK_Core>
+    <PkgAWSSDK_RDSDataService Condition=" '$(PkgAWSSDK_RDSDataService)' == '' ">C:\Users\dahye\.nuget\packages\awssdk.rdsdataservice\3.7.300.12</PkgAWSSDK_RDSDataService>
+    <PkgAWSSDK_RDS Condition=" '$(PkgAWSSDK_RDS)' == '' ">C:\Users\dahye\.nuget\packages\awssdk.rds\3.7.301.7</PkgAWSSDK_RDS>
   </PropertyGroup>
 </Project>

@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "FoodRecipeAPI/1.0.0": {
         "dependencies": {
+          "AWSSDK.RDS": "3.7.301.7",
+          "AWSSDK.RDSDataService": "3.7.300.12",
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Microsoft.EntityFrameworkCore": "6.0.25",
@@ -39,6 +41,36 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.1.0"
+          }
+        }
+      },
+      "AWSSDK.Core/3.7.300.12": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.300.12"
+          }
+        }
+      },
+      "AWSSDK.RDS/3.7.301.7": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.300.12"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.RDS.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.301.7"
+          }
+        }
+      },
+      "AWSSDK.RDSDataService/3.7.300.12": {
+        "dependencies": {
+          "AWSSDK.Core": "3.7.300.12"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.RDSDataService.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.300.12"
           }
         }
       },
@@ -534,6 +566,27 @@
       "sha512": "sha512-+g/K+Vpe3gGMKGzjslMOdqNlkikScDjWfVvmWTayrDHaG/n2pPmFBMa+jKX1r/h6BDGFdkyRjAuhFE3ykW+r1g==",
       "path": "automapper.extensions.microsoft.dependencyinjection/12.0.1",
       "hashPath": "automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512"
+    },
+    "AWSSDK.Core/3.7.300.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DubTKNM2y4cocRtgujQNA8Pt578y5g/EOM/IqDU/DxCDHESk7ehZDhll64fiFcqfdaoBe/Y5kuH/z4QpX76Fvg==",
+      "path": "awssdk.core/3.7.300.12",
+      "hashPath": "awssdk.core.3.7.300.12.nupkg.sha512"
+    },
+    "AWSSDK.RDS/3.7.301.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CnK4/qTBhZkVi7PG7ljuuYgeegR0blTiDgi1NJgQn98pEONE54HlmXo1QkXjRkIQIO9vXEbIe0b5WWipy1GURw==",
+      "path": "awssdk.rds/3.7.301.7",
+      "hashPath": "awssdk.rds.3.7.301.7.nupkg.sha512"
+    },
+    "AWSSDK.RDSDataService/3.7.300.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yq3EsIJ+48iFRcy7gIXiYYEGTianaTAbF9O/oOsP4zsNRPSVVYL9zD/B/osJf9HYY5y8FuXMMx/n52qo1akNbQ==",
+      "path": "awssdk.rdsdataservice/3.7.300.12",
+      "hashPath": "awssdk.rdsdataservice.3.7.300.12.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

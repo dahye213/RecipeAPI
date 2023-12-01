@@ -208,3 +208,6 @@ C:\API Clouding\Testing\RecipeAPI\FoodRecipeAPI\obj\Debug\net6.0\refint\FoodReci
 C:\API Clouding\Testing\RecipeAPI\FoodRecipeAPI\obj\Debug\net6.0\FoodRecipeAPI.pdb
 C:\API Clouding\Testing\RecipeAPI\FoodRecipeAPI\obj\Debug\net6.0\FoodRecipeAPI.genruntimeconfig.cache
 C:\API Clouding\Testing\RecipeAPI\FoodRecipeAPI\obj\Debug\net6.0\ref\FoodRecipeAPI.dll
+C:\API Clouding\FoodRecipeAPI\RecipeAPI\FoodRecipeAPI\bin\Debug\net6.0\AWSSDK.Core.dll
+C:\API Clouding\FoodRecipeAPI\RecipeAPI\FoodRecipeAPI\bin\Debug\net6.0\AWSSDK.RDS.dll
+C:\API Clouding\FoodRecipeAPI\RecipeAPI\FoodRecipeAPI\bin\Debug\net6.0\AWSSDK.RDSDataService.dll
