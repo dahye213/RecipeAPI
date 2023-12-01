@@ -79,14 +79,14 @@ namespace FoodRecipeAPI.Controllers
 
         // Get rating of a specific recipe
         [HttpGet("{id}/rating")]
-        [ProducesResponseType(200, Type = typeof(decimal))]
+        [ProducesResponseType(200, Type = typeof(double))]
         [ProducesResponseType(400)]
         public async Task<ActionResult> GetRecipeRating(int id)
         {
             if(!await _recipeRepository.RecipeExistsAsync(id))
                 return NotFound();
 
-            var rating = _recipeRepository.GetRecipeRating(id);
+            var rating = await _recipeRepository.GetRecipeRating(id);
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
             return Ok(rating);

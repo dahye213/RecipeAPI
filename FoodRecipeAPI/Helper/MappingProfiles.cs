@@ -10,6 +10,8 @@ namespace FoodRecipeAPI.Helper
         {
             CreateMap<Recipe, RecipeDto>();
             CreateMap<RecipeDto, Recipe>();
+            CreateMap<Rate, RateDto>();
+            CreateMap<RateDto, Rate>();
         }
     }
 }
