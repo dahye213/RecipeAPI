@@ -86,7 +86,7 @@ namespace FoodRecipeAPI.Controllers
             if(!await _recipeRepository.RecipeExistsAsync(id))
                 return NotFound();
 
-            var rating = _recipeRepository.GetRecipeRating(id);
+            var rating = await _recipeRepository.GetRecipeRating(id);
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
             return Ok(rating);
