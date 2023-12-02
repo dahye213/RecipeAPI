@@ -4,6 +4,7 @@ using FoodRecipeAPI.Interfaces;
 using FoodRecipeAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Net;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,10 +31,12 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Connection2RDS"));
 });
 
+
 var app = builder.Build();
 var scope = app.Services.CreateScope();
 var seed = scope.ServiceProvider.GetRequiredService<Seed>();
 await seed.RetrieveAndStoreDataAsync();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -42,7 +45,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
