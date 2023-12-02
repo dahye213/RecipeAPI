@@ -31,6 +31,51 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "AWSSDK.Core/3.7.300.12": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWSSDK.RDS/3.7.301.7": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[3.7.300.12, 4.0.0)"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/AWSSDK.RDS.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.RDS.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWSSDK.RDSDataService/3.7.300.12": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[3.7.300.12, 4.0.0)"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/AWSSDK.RDSDataService.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.RDSDataService.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -497,6 +542,13 @@
           }
         }
       },
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.19.5": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props": {},
+          "build/Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets": {}
+        }
+      },
       "Microsoft.Win32.Registry/4.7.0": {
         "type": "package",
         "dependencies": {
@@ -917,6 +969,99 @@
         "automapper.extensions.microsoft.dependencyinjection.nuspec",
         "icon.png",
         "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+      ]
+    },
+    "AWSSDK.Core/3.7.300.12": {
+      "sha512": "DubTKNM2y4cocRtgujQNA8Pt578y5g/EOM/IqDU/DxCDHESk7ehZDhll64fiFcqfdaoBe/Y5kuH/z4QpX76Fvg==",
+      "type": "package",
+      "path": "awssdk.core/3.7.300.12",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "awssdk.core.3.7.300.12.nupkg.sha512",
+        "awssdk.core.nuspec",
+        "images/AWSLogo.png",
+        "lib/net35/AWSSDK.Core.dll",
+        "lib/net35/AWSSDK.Core.pdb",
+        "lib/net35/AWSSDK.Core.xml",
+        "lib/net45/AWSSDK.Core.dll",
+        "lib/net45/AWSSDK.Core.pdb",
+        "lib/net45/AWSSDK.Core.xml",
+        "lib/net8.0/AWSSDK.Core.dll",
+        "lib/net8.0/AWSSDK.Core.pdb",
+        "lib/net8.0/AWSSDK.Core.xml",
+        "lib/netcoreapp3.1/AWSSDK.Core.dll",
+        "lib/netcoreapp3.1/AWSSDK.Core.pdb",
+        "lib/netcoreapp3.1/AWSSDK.Core.xml",
+        "lib/netstandard2.0/AWSSDK.Core.dll",
+        "lib/netstandard2.0/AWSSDK.Core.pdb",
+        "lib/netstandard2.0/AWSSDK.Core.xml",
+        "tools/account-management.ps1"
+      ]
+    },
+    "AWSSDK.RDS/3.7.301.7": {
+      "sha512": "CnK4/qTBhZkVi7PG7ljuuYgeegR0blTiDgi1NJgQn98pEONE54HlmXo1QkXjRkIQIO9vXEbIe0b5WWipy1GURw==",
+      "type": "package",
+      "path": "awssdk.rds/3.7.301.7",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.RDS.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.rds.3.7.301.7.nupkg.sha512",
+        "awssdk.rds.nuspec",
+        "images/AWSLogo.png",
+        "lib/net35/AWSSDK.RDS.dll",
+        "lib/net35/AWSSDK.RDS.pdb",
+        "lib/net35/AWSSDK.RDS.xml",
+        "lib/net45/AWSSDK.RDS.dll",
+        "lib/net45/AWSSDK.RDS.pdb",
+        "lib/net45/AWSSDK.RDS.xml",
+        "lib/net8.0/AWSSDK.RDS.dll",
+        "lib/net8.0/AWSSDK.RDS.pdb",
+        "lib/net8.0/AWSSDK.RDS.xml",
+        "lib/netcoreapp3.1/AWSSDK.RDS.dll",
+        "lib/netcoreapp3.1/AWSSDK.RDS.pdb",
+        "lib/netcoreapp3.1/AWSSDK.RDS.xml",
+        "lib/netstandard2.0/AWSSDK.RDS.dll",
+        "lib/netstandard2.0/AWSSDK.RDS.pdb",
+        "lib/netstandard2.0/AWSSDK.RDS.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "AWSSDK.RDSDataService/3.7.300.12": {
+      "sha512": "yq3EsIJ+48iFRcy7gIXiYYEGTianaTAbF9O/oOsP4zsNRPSVVYL9zD/B/osJf9HYY5y8FuXMMx/n52qo1akNbQ==",
+      "type": "package",
+      "path": "awssdk.rdsdataservice/3.7.300.12",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.RDSDataService.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.rdsdataservice.3.7.300.12.nupkg.sha512",
+        "awssdk.rdsdataservice.nuspec",
+        "images/AWSLogo.png",
+        "lib/net35/AWSSDK.RDSDataService.dll",
+        "lib/net35/AWSSDK.RDSDataService.pdb",
+        "lib/net35/AWSSDK.RDSDataService.xml",
+        "lib/net45/AWSSDK.RDSDataService.dll",
+        "lib/net45/AWSSDK.RDSDataService.pdb",
+        "lib/net45/AWSSDK.RDSDataService.xml",
+        "lib/net8.0/AWSSDK.RDSDataService.dll",
+        "lib/net8.0/AWSSDK.RDSDataService.pdb",
+        "lib/net8.0/AWSSDK.RDSDataService.xml",
+        "lib/netcoreapp3.1/AWSSDK.RDSDataService.dll",
+        "lib/netcoreapp3.1/AWSSDK.RDSDataService.pdb",
+        "lib/netcoreapp3.1/AWSSDK.RDSDataService.xml",
+        "lib/netstandard2.0/AWSSDK.RDSDataService.dll",
+        "lib/netstandard2.0/AWSSDK.RDSDataService.pdb",
+        "lib/netstandard2.0/AWSSDK.RDSDataService.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
       ]
     },
     "Humanizer.Core/2.8.26": {
@@ -1801,6 +1946,87 @@
         "microsoft.openapi.nuspec"
       ]
     },
+    "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.19.5": {
+      "sha512": "Kaa1rBZdJFq5A0qgAcl6Bmk/UqLXTq9acEqxUlPEBA8oscmakLfkvuSXfG7Wa9t1/keaT85EuuDNgOo+Z9VYOQ==",
+      "type": "package",
+      "path": "microsoft.visualstudio.azure.containers.tools.targets/1.19.5",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CHANGELOG.md",
+        "EULA.md",
+        "ThirdPartyNotices.txt",
+        "build/Container.props",
+        "build/Container.targets",
+        "build/Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props",
+        "build/Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets",
+        "build/Rules/GeneralBrowseObject.xaml",
+        "build/Rules/cs-CZ/GeneralBrowseObject.xaml",
+        "build/Rules/de-DE/GeneralBrowseObject.xaml",
+        "build/Rules/es-ES/GeneralBrowseObject.xaml",
+        "build/Rules/fr-FR/GeneralBrowseObject.xaml",
+        "build/Rules/it-IT/GeneralBrowseObject.xaml",
+        "build/Rules/ja-JP/GeneralBrowseObject.xaml",
+        "build/Rules/ko-KR/GeneralBrowseObject.xaml",
+        "build/Rules/pl-PL/GeneralBrowseObject.xaml",
+        "build/Rules/pt-BR/GeneralBrowseObject.xaml",
+        "build/Rules/ru-RU/GeneralBrowseObject.xaml",
+        "build/Rules/tr-TR/GeneralBrowseObject.xaml",
+        "build/Rules/zh-CN/GeneralBrowseObject.xaml",
+        "build/Rules/zh-TW/GeneralBrowseObject.xaml",
+        "build/ToolsTarget.props",
+        "build/ToolsTarget.targets",
+        "icon.png",
+        "microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
+        "microsoft.visualstudio.azure.containers.tools.targets.nuspec",
+        "tools/Microsoft.VisualStudio.Containers.Tools.Common.dll",
+        "tools/Microsoft.VisualStudio.Containers.Tools.Shared.dll",
+        "tools/Microsoft.VisualStudio.Containers.Tools.Tasks.dll",
+        "tools/Newtonsoft.Json.dll",
+        "tools/System.Security.Principal.Windows.dll",
+        "tools/cs/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/cs/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/cs/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/de/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/de/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/de/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/es/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/es/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/es/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/fr/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/fr/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/fr/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/it/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/it/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/it/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/ja/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/ja/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/ja/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/ko/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/ko/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/ko/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/pl/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/pl/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/pl/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/pt-BR/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/pt-BR/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/pt-BR/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/ru/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/ru/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/ru/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/tr/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/tr/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/tr/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/utils/KillProcess.exe",
+        "tools/zh-Hans/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/zh-Hans/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/zh-Hans/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll",
+        "tools/zh-Hant/Microsoft.VisualStudio.Containers.Tools.Common.resources.dll",
+        "tools/zh-Hant/Microsoft.VisualStudio.Containers.Tools.Shared.resources.dll",
+        "tools/zh-Hant/Microsoft.VisualStudio.Containers.Tools.Tasks.resources.dll"
+      ]
+    },
     "Microsoft.Win32.Registry/4.7.0": {
       "sha512": "KSrRMb5vNi0CWSGG1++id2ZOs/1QhRqROt+qgbEAdQuGjGrFcl4AOl4/exGPUYz2wUnU42nvJqon1T3U0kPXLA==",
       "type": "package",
@@ -2454,11 +2680,14 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "AWSSDK.RDS >= 3.7.301.7",
+      "AWSSDK.RDSDataService >= 3.7.300.12",
       "AutoMapper >= 12.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "Microsoft.EntityFrameworkCore >= 6.0.25",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.25",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.25",
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets >= 1.19.5",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
@@ -2469,11 +2698,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\API Clouding\\Testing\\RecipeAPI\\FoodRecipeAPI\\FoodRecipeAPI.csproj",
+      "projectUniqueName": "C:\\API Clouding\\FoodRecipeAPI\\RecipeAPI\\FoodRecipeAPI\\FoodRecipeAPI.csproj",
       "projectName": "FoodRecipeAPI",
-      "projectPath": "C:\\API Clouding\\Testing\\RecipeAPI\\FoodRecipeAPI\\FoodRecipeAPI.csproj",
+      "projectPath": "C:\\API Clouding\\FoodRecipeAPI\\RecipeAPI\\FoodRecipeAPI\\FoodRecipeAPI.csproj",
       "packagesPath": "C:\\Users\\dahye\\.nuget\\packages\\",
-      "outputPath": "C:\\API Clouding\\Testing\\RecipeAPI\\FoodRecipeAPI\\obj\\",
+      "outputPath": "C:\\API Clouding\\FoodRecipeAPI\\RecipeAPI\\FoodRecipeAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2506,6 +2735,14 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "AWSSDK.RDS": {
+            "target": "Package",
+            "version": "[3.7.301.7, )"
+          },
+          "AWSSDK.RDSDataService": {
+            "target": "Package",
+            "version": "[3.7.300.12, )"
+          },
           "AutoMapper": {
             "target": "Package",
             "version": "[12.0.1, )"
@@ -2527,6 +2764,10 @@
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[6.0.25, )"
+          },
+          "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+            "target": "Package",
+            "version": "[1.19.5, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
