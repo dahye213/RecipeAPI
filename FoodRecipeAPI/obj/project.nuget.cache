@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VOZUNHzyHoiqgQviMUdGl5RdYLwzLssHGP1UImNZ/MRm73BxxGuY7RU3taffFKWYModpe+TE02sTdlCvWU+24A==",
+  "dgSpecHash": "d8gMEYWDx1UeJ6oY+LzHNkFOoUVa3zpvjR/1yesekpFcD7VLWgPyRqFDtOxkOjSRQvLKDksWBb3IDb+9/4I05A==",
   "success": true,
   "projectFilePath": "C:\\API Clouding\\FoodRecipeAPI\\RecipeAPI\\FoodRecipeAPI\\FoodRecipeAPI.csproj",
   "expectedPackageFiles": [
@@ -37,6 +37,7 @@
     "C:\\Users\\dahye\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.8.0\\microsoft.identitymodel.tokens.6.8.0.nupkg.sha512",
     "C:\\Users\\dahye\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\dahye\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\dahye\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
     "C:\\Users\\dahye\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\dahye\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\dahye\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
