@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  foodrecipeapi:
-    image: ${DOCKER_REGISTRY-}foodrecipeapi
-    build:
-      context: .
-      dockerfile: FoodRecipeAPI/Dockerfile
