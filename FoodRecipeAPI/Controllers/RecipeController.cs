@@ -38,10 +38,10 @@ namespace FoodRecipeAPI.Controllers
         }
 
         // GET a specific recipe
-        [HttpGet("{id}")]
+        [HttpGet("getById")]
         [ProducesResponseType(200, Type= typeof(Recipe))]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<RecipeDto>> GetRecipeById(int id)
+        public async Task<ActionResult<RecipeDto>> GetRecipeById([FromQuery] int id)
         {
             try
             {
@@ -57,10 +57,10 @@ namespace FoodRecipeAPI.Controllers
                 return StatusCode(500, "Something went wrong");
             }
         }
-        [HttpGet("title/{title}")]
+        [HttpGet("getByTitle")]
         [ProducesResponseType(200, Type = typeof(Recipe))]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<RecipeDto>> GetRecipeByTitle(string title)
+        public async Task<ActionResult<RecipeDto>> GetRecipeByTitle([FromQuery] string title)
         {
             try
             {
@@ -78,10 +78,10 @@ namespace FoodRecipeAPI.Controllers
         }
 
         // Get rating of a specific recipe
-        [HttpGet("{id}/rating")]
+        [HttpGet("rating")]
         [ProducesResponseType(200, Type = typeof(double))]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> GetRecipeRating(int id)
+        public async Task<ActionResult> GetRecipeRating([FromQuery] int id)
         {
             if(!await _recipeRepository.RecipeExistsAsync(id))
                 return NotFound();
