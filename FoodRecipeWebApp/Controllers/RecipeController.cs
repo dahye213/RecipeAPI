@@ -7,7 +7,7 @@ namespace FoodRecipeWebApp.Controllers
 {
     public class RecipeController : Controller
     {
-        Uri baseAddress = new Uri("http://35.183.180.44/api"); // For recipes
+        Uri baseAddress = new Uri("http://35.183.180.44/api/Recipe"); // For recipes
         private readonly HttpClient _client;
 
         public RecipeController() 
