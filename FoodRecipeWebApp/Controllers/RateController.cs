@@ -7,7 +7,7 @@ namespace FoodRecipeWebApp.Controllers
 {
     public class RateController : Controller
     {
-        Uri baseAddress = new Uri("http://35.183.180.44/api/Rate"); // For recipes
+        Uri baseAddress = new Uri("http://35.183.180.44/api/Rate"); // For Rate
         private readonly HttpClient _client;
 
         public RateController()
@@ -116,7 +116,7 @@ namespace FoodRecipeWebApp.Controllers
             {
                 RateViewModel rate = new RateViewModel();
                 // ############################################################################################### FIX PATH
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/rate/GetRecipeById/" + Id).Result;
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/rate/GetRateById/" + Id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -139,7 +139,7 @@ namespace FoodRecipeWebApp.Controllers
             try
             {
                 // ############################################################################################### FIX PATH
-                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + "/rate/DeleteRecipe/" + Id).Result;
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + "/rate/DeleteRate/" + Id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
