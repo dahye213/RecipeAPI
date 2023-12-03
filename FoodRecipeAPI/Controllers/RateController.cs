@@ -41,10 +41,10 @@ namespace FoodRecipeAPI.Controllers
         }
 
         // GET a specific rate
-        [HttpGet("{Id}")]
+        [HttpGet("getById")]
         [ProducesResponseType(200, Type = typeof(Rate))]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<RateDto>> GetRateById(int Id)
+        public async Task<ActionResult<RateDto>> GetRateById([FromQuery] int Id)
         {
             try
             {
@@ -62,10 +62,10 @@ namespace FoodRecipeAPI.Controllers
             }
         }
 
-        [HttpGet("score/{score}")]
+        [HttpGet("{score}")]
         [ProducesResponseType(200, Type = typeof(Rate))]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<RateDto>> GetRateByScore(double score)
+        public async Task<ActionResult<RateDto>> GetRateByScore([FromQuery] double score)
         {
             try
             {
