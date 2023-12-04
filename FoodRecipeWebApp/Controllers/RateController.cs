@@ -21,7 +21,7 @@ namespace FoodRecipeWebApp.Controllers
         {
             List<RateViewModel> rateList = new List<RateViewModel>();
             // ################################################################################################### FIX PATH
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/rate/GetAllRate").Result;
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress).Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -45,7 +45,7 @@ namespace FoodRecipeWebApp.Controllers
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 // ############################################################################################### FIX PATH
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/rate/CreateRate", content).Result;
+                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "CreateRate", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["successMessage"] = "Rating Created!";
@@ -68,7 +68,7 @@ namespace FoodRecipeWebApp.Controllers
             {
                 RateViewModel rate = new RateViewModel();
                 // ################################################################################################ FIX PATH
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/rate/GetRateById/" + Id).Result;
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/GetRateById/" + Id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -92,7 +92,7 @@ namespace FoodRecipeWebApp.Controllers
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 // ################################################################################################ FIX PATH
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/rate/UpdateRate", content).Result;
+                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/rUpdateRate", content).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -116,7 +116,7 @@ namespace FoodRecipeWebApp.Controllers
             {
                 RateViewModel rate = new RateViewModel();
                 // ############################################################################################### FIX PATH
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/rate/GetRateById/" + Id).Result;
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/GetRateById/" + Id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -139,7 +139,7 @@ namespace FoodRecipeWebApp.Controllers
             try
             {
                 // ############################################################################################### FIX PATH
-                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + "/rate/DeleteRate/" + Id).Result;
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + "/DeleteRate/" + Id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
