@@ -138,7 +138,7 @@ namespace FoodRecipeWebApp.Controllers
             try
             {
                 // ############################################################################################### FIX PATH
-                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + "/DeleteRecipe/" + id).Result;
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + "/" + id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
