@@ -21,7 +21,7 @@ namespace FoodRecipeWebApp.Controllers
         {
             List<RecipeViewModel> recipeList = new List<RecipeViewModel>();
             // ################################################################################################### FIX PATH
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/recipe/GetAllRecipes").Result;
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress).Result;
 
             if(response.IsSuccessStatusCode) {
                 string data = response.Content.ReadAsStringAsync().Result;
@@ -44,7 +44,7 @@ namespace FoodRecipeWebApp.Controllers
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 // ############################################################################################### FIX PATH
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/recipe/CreateRecipe", content).Result;
+                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/CreateRecipe", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["successMessage"] = "Recipe Created!";
@@ -67,7 +67,7 @@ namespace FoodRecipeWebApp.Controllers
             {
                 RecipeViewModel recipe = new RecipeViewModel();
                 // ################################################################################################ FIX PATH
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/recipe/GetRecipeById/" + id).Result;
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/GetRecipeById/" + id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -91,7 +91,7 @@ namespace FoodRecipeWebApp.Controllers
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 // ################################################################################################ FIX PATH
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/recipe/UpdateRecipe", content).Result;
+                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/UpdateRecipe", content).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -115,7 +115,7 @@ namespace FoodRecipeWebApp.Controllers
             {
                 RecipeViewModel recipe = new RecipeViewModel();
                 // ############################################################################################### FIX PATH
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/recipe/GetRecipeById/" + id).Result;
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/GetRecipeById/" + id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -138,7 +138,7 @@ namespace FoodRecipeWebApp.Controllers
             try
             {
                 // ############################################################################################### FIX PATH
-                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + "/recipe/DeleteRecipe/" + id).Result;
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + "/DeleteRecipe/" + id).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
