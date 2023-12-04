@@ -45,7 +45,7 @@ namespace FoodRecipeWebApp.Controllers
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 // ############################################################################################### FIX PATH
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "CreateRate", content).Result;
+                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "/CreateRate", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["successMessage"] = "Rating Created!";
